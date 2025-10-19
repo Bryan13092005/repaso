@@ -100,6 +100,7 @@ public class Main {
                     break;
                 case 6:
                     System.out.println("SALIENDO----------");
+                    datos.close();
                     return;
                 default:
                     System.out.println("Ingresa una opcion valida");
