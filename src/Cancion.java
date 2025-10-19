@@ -1,16 +1,17 @@
 public class Cancion {
-    private String titulo,duracion,reproducciones;
+    private String titulo,duracion;
+    private int reproducciones;
 
-    public Cancion(String titulo,String duracion,String reproducciones){
+    public Cancion(String titulo,String duracion,int reproducciones){
         this.duracion=duracion;
         this.reproducciones=reproducciones;
-        this.titulo=titulo;
+        this.titulo=titulo.toUpperCase();
     }
 
     public Cancion(){
         titulo="LLAMADO DE EMERGENCIA";
         duracion="3:59 minutos";
-        reproducciones="3,14 millones";
+        reproducciones=3140000;
     }
 
     public String getTitulo() {
@@ -21,7 +22,7 @@ public class Cancion {
         if(titulo.trim().isEmpty()){
             System.out.println("EL TITULO NO PUEDE ESTAR VACIO");
         }else{
-            this.titulo = titulo;
+            this.titulo = titulo.toUpperCase();
         }
     }
 
@@ -37,7 +38,7 @@ public class Cancion {
         }
     }
 
-    public String getReproducciones() {
+    public int getReproducciones() {
         return reproducciones;
     }
 
@@ -45,7 +46,22 @@ public class Cancion {
         if(reproducciones.trim().isEmpty()){
             System.out.println("LA CANTIDAD DE REPRODUCCIONES NO DEBE ESTRA VACIA");
         }else{
-            this.reproducciones = reproducciones+" millones";
+            try {
+                int numReproducciones=Integer.parseInt(reproducciones);
+                if(numReproducciones<0){
+                    System.out.println("INGRESA UN NUMERO MAYOR A 0");
+                }else{
+                    this.reproducciones = numReproducciones;
+                }
+            }catch (NumberFormatException e){
+                System.out.println("INGRESA UN NUMERO VALIDO");
+            }
+
         }
     }
+
+    public void reproducir(){
+        reproducciones+=1;
+    }
+
 }

@@ -1,18 +1,19 @@
 public class Artista {
-    private String nombre, generoMusical,seguidores;
+    private String nombre, generoMusical;
+    int seguidores;
     char generoArtista;
 
-    public Artista(String nombre,String seguidores, char generoArtista,String generoMusical){
-        this.generoArtista=generoArtista;
-        this.generoMusical=generoMusical;
-        this.nombre=nombre;
+    public Artista(String nombre,int seguidores, String generoArtistaString,String generoMusical){
+        this.generoArtista=generoArtistaString.toUpperCase().charAt(0);
+        this.generoMusical=generoMusical.toUpperCase();
+        this.nombre=nombre.toUpperCase();
         this.seguidores=seguidores;
     }
     public Artista(){
         nombre="DY";
         generoArtista='M';
         generoMusical="URBANO";
-        seguidores="40,5 millones";
+        seguidores=40500000;
     }
 
     public String getNombre() {
@@ -28,7 +29,7 @@ public class Artista {
     }
 
     public char getGeneroArtista() {
-        return generoArtista;
+        return (generoArtista);
     }
 
     public void setGeneroArtista(String generoArtistaString) {
@@ -49,19 +50,36 @@ public class Artista {
         if (generoMusical.trim().isEmpty()){
             System.out.println("EL GENERO MUSICAL NO DEBE ESTAR VACIO");
         }else {
-            this.generoMusical = generoMusical;
+            this.generoMusical = generoMusical.toUpperCase();
         }
     }
 
-    public String getSeguidores() {
+    public int getSeguidores() {
         return seguidores;
     }
 
     public void setSeguidores(String seguidores) {
         if(seguidores.trim().isEmpty()){
-            System.out.println("DEBES AGREGAR EL NUMERO DE EGUIDORES");
+            System.out.println("DEBES AGREGAR EL NUMERO DE SEGUIDORES");
         }else {
-            this.seguidores = seguidores;
+            try {
+                int numSeguidores=Integer.parseInt(seguidores);
+                if(numSeguidores<0){
+                    System.out.println("EL NUMERO DE SEGUIDORES DEBE SER MAYOR A 0");
+                }else{
+                    this.seguidores = numSeguidores;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("INGRESA UN NUMEMRO VALIDO");
+            }
+        }
+    }
+
+    public void ganarSeguidores(int cantidad){
+        if (cantidad>0){
+            seguidores+=cantidad;
+        }else{
+            System.out.println("NO PODEMOS SUMAR SEGUIDORES NEGATIVOS");
         }
     }
 }
